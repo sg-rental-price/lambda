@@ -1,0 +1,32 @@
+{
+  "name": "lambda",
+  "version": "1.0.0",
+  "description": "Lambda For sgrentalprice",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sg-rental-price/lambda.git"
+  },
+  "keywords": [
+    "Lambda",
+    "singapore",
+    "rental",
+    "price"
+  ],
+  "author": "Phong Le",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/sg-rental-price/lambda/issues"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "pg": "^8.1.0",
+    "sql-template-strings": "^2.2.2",
+    "svy21": "^1.0.0"
+  },
+  "scripts": {
+    "deploy:rental_stats": "FUNC=rental_stats bash ./script/deploy_lambda.sh",
+    "deploy:project_list": "FUNC=project_list bash ./script/deploy_lambda.sh"
+  },
+  "homepage": "https://github.com/sg-rental-price/lambda#readme"
+}
