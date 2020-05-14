@@ -29,14 +29,7 @@ jobs:
       run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
 
     - name: Deploy all functions
-      run: |
-        ls -lah
-        aws s3 ls
-
-    - name: Upload to S3 Bucket
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --acl public-read --follow-symlinks --delete
+      run: bash ./script/deploy_all_functions.sh
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
