@@ -26,7 +26,8 @@
   },
   "scripts": {
     "deploy:rental_stats": "FUNC=rental_stats bash ./script/deploy_lambda.sh",
-    "deploy:project_list": "FUNC=project_list bash ./script/deploy_lambda.sh"
+    "deploy:project_list": "FUNC=project_list bash ./script/deploy_lambda.sh",
+    "deploy:all": "bash ./script/deploy_all_functions.sh"
   },
   "homepage": "https://github.com/sg-rental-price/lambda#readme"
 }
