@@ -23,6 +23,31 @@ for path in ../../src/*; do
     cd ..
     echo ">>Update function"
     aws lambda update-function-code --function-name ${FUNC} --zip-file fileb://${FUNC}.zip
+
+
+    FUNC_ALIAS=''
+    case "$BRANCH" in
+        production)
+            FUNC_ALIAS="prod"
+            ;;
+        staging)
+            FUNC_ALIAS="staging"
+            ;;
+    esac
+
+    if [ "$FUNC_ALIAS" = "" ]; then
+      continue
+    fi
+
+    echo ">Deploying to alias $BRANCH"
+
+    DESCRIPTION="Auto deploy commit $GITHUB_SHA to ${FUNC_ALIAS} alias"
+
+    VERSION=$(aws lambda publish-version --function-name=$FUNC --description="$DESCRIPTION" | grep Version | cut -d"\"" -f4)
+    echo ">>Created new version $VERSION"
+    aws lambda update-alias --function-name=$FUNC --function-version=$VERSION --name=$FUNC_ALIAS
+
+    echo ">>Updated alias"
   fi
 done
 
