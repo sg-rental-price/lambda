@@ -35,16 +35,17 @@ for path in ../../src/*; do
             ;;
     esac
 
+    echo ">Deploying to alias ${FUNC_ALIAS:-LATEST}"
+
+    DESCRIPTION="Auto deploy commit $GITHUB_SHA to ${FUNC_ALIAS:-LATEST} alias"
+
+    VERSION=$(aws lambda publish-version --function-name=$FUNC --description="$DESCRIPTION" | grep Version | cut -d"\"" -f4)
+    echo ">>Created new version $VERSION"
+
     if [ "$FUNC_ALIAS" = "" ]; then
       continue
     fi
 
-    echo ">Deploying to alias $BRANCH"
-
-    DESCRIPTION="Auto deploy commit $GITHUB_SHA to ${FUNC_ALIAS} alias"
-
-    VERSION=$(aws lambda publish-version --function-name=$FUNC --description="$DESCRIPTION" | grep Version | cut -d"\"" -f4)
-    echo ">>Created new version $VERSION"
     aws lambda update-alias --function-name=$FUNC --function-version=$VERSION --name=$FUNC_ALIAS
 
     echo ">>Updated alias"
