@@ -29,7 +29,9 @@ jobs:
       run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
 
     - name: Deploy all functions
-      run: bash ./scripts/deploy_all_functions.sh
+      run: |
+        ls -lah
+        aws s3 ls
 
     - name: Upload to S3 Bucket
       uses: jakejarvis/s3-sync-action@master
