@@ -19,7 +19,7 @@
     "url": "https://github.com/sg-rental-price/lambda/issues"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "pg": "^8.1.0",
     "sql-template-strings": "^2.2.2",
     "svy21": "^1.0.0"
